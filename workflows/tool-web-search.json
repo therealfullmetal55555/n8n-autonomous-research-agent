@@ -1,0 +1,28 @@
+{
+  "name": "Tool — Web Search (Tavily)",
+  "nodes": [
+    {
+      "parameters": {
+        "url": "https://api.tavily.com/search",
+        "method": "POST",
+        "bodyParametersUi": {
+          "parameter": [
+            {
+              "name": "query",
+              "value": "={{ $json.query }}"
+            },
+            {
+              "name": "search_depth",
+              "value": "basic"
+            }
+          ]
+        }
+      },
+      "name": "Tavily Search API",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [240, 300]
+    }
+  ],
+  "connections": {}
+}

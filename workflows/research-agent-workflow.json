@@ -1,0 +1,99 @@
+{
+  "name": "Research Agent — Brief Builder",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {
+          "allowFileUploads": false
+        }
+      },
+      "name": "Chat Trigger",
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.1,
+      "position": [240, 300]
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "query",
+              "value": "={{ $json.chatInput }}"
+            },
+            {
+              "name": "run_id",
+              "value": "=run_{{ $execution.id }}"
+            },
+            {
+              "name": "started_at",
+              "value": "={{ $now.toISO() }}"
+            }
+          ]
+        }
+      },
+      "name": "Init Run",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 2,
+      "position": [440, 300]
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.query }}",
+        "options": {
+          "systemMessage": "ROLE\nYou are an autonomous senior research analyst. You produce verified, executive-ready research briefs.\n\nPROCEDURE\n1. Plan: identify core questions and sub-claims.\n2. Prefer lookup_internal_data for DemoCo internal facts.\n3. Use web_search for discovering sources.\n4. Use fetch_page (max 3/run) to verify exact numbers and dates.\n5. Use calculator for arithmetic.\n6. Structure: TL;DR -> Key Findings with sources -> Risks & Uncertainties -> Recommended Next Steps.\n7. NEVER cite a URL you did not observe in tool results.",
+          "maxIterations": 8,
+          "returnIntermediateSteps": true
+        }
+      },
+      "name": "Research Agent",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.7,
+      "position": [680, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "const briefText = $input.first().json.output ?? '';\nconst intermediateSteps = $('Research Agent').first().json.intermediateSteps ?? [];\nconst citedUrls = briefText.match(/https?:\\/\\/[^\\s\"'<>\\]]+/g) || [];\nreturn [{ json: { briefText, citedUrls: [...new Set(citedUrls)], isValid: true } }];"
+      },
+      "name": "Validate Brief",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [900, 300]
+    }
+  ],
+  "connections": {
+    "Chat Trigger": {
+      "main": [
+        [
+          {
+            "node": "Init Run",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Init Run": {
+      "main": [
+        [
+          {
+            "node": "Research Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Research Agent": {
+      "main": [
+        [
+          {
+            "node": "Validate Brief",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  }
+}
