@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 480" width="100%" height="100%">
+  <defs>
+    <style>
+      .bg { fill: #0A0A0A; }
+      .grid-line { stroke: #181818; stroke-width: 1; }
+      .box { fill: #111111; stroke: #262626; stroke-width: 1.5; rx: 4px; }
+      .box-active { fill: #141414; stroke: #00FF66; stroke-width: 1.5; rx: 4px; }
+      .text-title { font-family: 'SF Mono', 'Courier New', monospace; font-size: 13px; fill: #FFFFFF; font-weight: bold; letter-spacing: 1px; }
+      .text-sub { font-family: 'SF Mono', 'Courier New', monospace; font-size: 11px; fill: #888888; }
+      .text-accent { font-family: 'SF Mono', 'Courier New', monospace; font-size: 11px; fill: #00FF66; }
+      .line { stroke: #333333; stroke-width: 1.5; stroke-dasharray: 4,4; }
+      .line-solid { stroke: #00FF66; stroke-width: 1.5; }
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1000" height="480" class="bg" />
+  
+  <!-- Grid -->
+  <line x1="0" y1="80" x2="1000" y2="80" class="grid-line" />
+  <line x1="0" y1="400" x2="1000" y2="400" class="grid-line" />
+  <line x1="200" y1="0" x2="200" y2="480" class="grid-line" />
+  <line x1="800" y1="0" x2="800" y2="480" class="grid-line" />
+
+  <!-- Header -->
+  <text x="40" y="50" class="text-title">// SYSTEM_ARCHITECTURE :: N8N_AUTONOMOUS_RESEARCH_AGENT</text>
+  <text x="740" y="50" class="text-accent">[STATUS: PRODUCTION_ACTIVE]</text>
+
+  <!-- QUERY INGEST -->
+  <rect x="40" y="160" width="160" height="140" class="box" />
+  <text x="55" y="190" class="text-title">RESEARCH PROMPT</text>
+  <text x="55" y="215" class="text-sub">› Chat UI / Webhook</text>
+  <text x="55" y="235" class="text-sub">› Execution Init</text>
+  <text x="55" y="255" class="text-sub">› Hard Timeout 300s</text>
+  <text x="55" y="275" class="text-accent">› Cost Guard: $0.05</text>
+
+  <!-- AGENT REACT LOOP -->
+  <line x1="200" y1="230" x2="260" y2="230" class="line-solid" />
+
+  <rect x="260" y="130" width="220" height="200" class="box-active" />
+  <text x="280" y="160" class="text-title">GEMINI 2.5 FLASH AGENT</text>
+  <text x="280" y="185" class="text-accent">› ReAct Function Loop</text>
+  <text x="280" y="210" class="text-sub">› Max Iterations: 8</text>
+  <text x="280" y="235" class="text-sub">› Dynamic Tool Selection</text>
+  <text x="280" y="260" class="text-sub">› Internal First Priority</text>
+  <text x="280" y="285" class="text-accent">› Budget Defense In Depth</text>
+  <text x="280" y="310" class="text-sub">› Intermediate Steps ON</text>
+
+  <!-- 4 CONNECTED TOOLS -->
+  <line x1="480" y1="160" x2="550" y2="100" class="line" />
+  <line x1="480" y1="210" x2="550" y2="180" class="line" />
+  <line x1="480" y1="260" x2="550" y2="260" class="line" />
+  <line x1="480" y1="310" x2="550" y2="340" class="line" />
+
+  <rect x="550" y="70" width="210" height="60" class="box" />
+  <text x="565" y="95" class="text-title">TOOL: WEB_SEARCH</text>
+  <text x="565" y="115" class="text-sub">Tavily API · Domain Exclude · Fallback</text>
+
+  <rect x="550" y="150" width="210" height="60" class="box" />
+  <text x="565" y="175" class="text-title">TOOL: FETCH_PAGE</text>
+  <text x="565" y="195" class="text-sub">SSRF Safe · HTML Clean · Max 12k char</text>
+
+  <rect x="550" y="230" width="210" height="60" class="box" />
+  <text x="565" y="255" class="text-title">TOOL: CALCULATOR</text>
+  <text x="565" y="275" class="text-sub">Arithmetic on verified numbers only</text>
+
+  <rect x="550" y="310" width="210" height="60" class="box" />
+  <text x="565" y="335" class="text-title">TOOL: LOOKUP_INTERNAL</text>
+  <text x="565" y="355" class="text-accent">Preferred source for DemoCo facts</text>
+
+  <!-- VALIDATION & REPORT -->
+  <line x1="760" y1="205" x2="810" y2="205" class="line-solid" />
+
+  <rect x="810" y="150" width="160" height="160" class="box-active" />
+  <text x="825" y="180" class="text-title">BRIEF &amp; TRACE</text>
+  <text x="825" y="205" class="text-accent">› Citation Diffing</text>
+  <text x="825" y="225" class="text-sub">› Zero-Hallucination</text>
+  <text x="825" y="245" class="text-sub">› Auto-Repair Pass</text>
+  <text x="825" y="265" class="text-sub">› Google Doc Export</text>
+  <text x="825" y="285" class="text-accent">› Trace Ledger Audit</text>
+
+  <!-- FOOTER -->
+  <text x="40" y="435" class="text-sub">FREE-TIER ARCHITECTURE ($0/MO)  |  8-CALL HARD BUDGET GUARD  |  EMPIRICAL REPRODUCIBILITY</text>
+</svg>
